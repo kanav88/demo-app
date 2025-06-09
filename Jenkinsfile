@@ -6,7 +6,17 @@ pipeline {
         NEXUS_CREDENTIALS_ID = "nexus-admin-credentials"
     }
 
+    tools {
+        maven 'maven-3'
+        jdk 'jdk-17'
+    }
+
     stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
         stage('Create Artifact') {
             steps {
                 // Create a dummy JAR file as artifact
